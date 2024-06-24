@@ -1,0 +1,12 @@
+.idea/
+.venv/
+**/__pycache__
+
+backend/db.sqlite3
+
+docker/dev/envs
+
+__pycache__/
+*.py[cod]
+.DS_Store
+.envs

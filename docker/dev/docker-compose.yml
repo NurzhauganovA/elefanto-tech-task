@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+    elefanto-backend:
+        build:
+            context: ../..
+            dockerfile: docker/dev/Dockerfile
+        container_name: elefanto-backend
+        restart: always
+        env_file:
+            - envs/.env.backend
+        volumes:
+            - ../../backend:/app
+            - media:/app/media
+        ports:
+            - "7777:8000"
+        depends_on:
+            elefanto-db:
+                condition: service_healthy
+        command: sh -c "/entrypoint.sh"
+        networks:
+            - elefanto-network
+
+    elefanto-db:
+        build:
+            context: ../..
+            dockerfile: docker/dev/Dockerfile-db
+        image: postgres:16-alpine
+        container_name: elefanto-db
+        restart: always
+        env_file:
+            - envs/.env.db
+        ports:
+            - "7778:5432"
+        healthcheck:
+            test: [ "CMD", "pg_isready", "-q" ]
+        volumes:
+            - elefanto_db_data:/var/lib/postgresql/data
+            - ./init:/docker-entrypoint-initdb.d
+        networks:
+            - elefanto-network
+
+volumes:
+    elefanto_db_data:
+    media:
+
+networks:
+    elefanto-network:
+        driver: bridge

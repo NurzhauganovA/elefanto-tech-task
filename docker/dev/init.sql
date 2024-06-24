@@ -1,0 +1,6 @@
+CREATE USER elefantotask WITH PASSWORD '@WSX3edc';
+CREATE DATABASE elefantotech;
+GRANT ALL PRIVILEGES ON DATABASE elefantotech TO elefantotask;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO elefantotask;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO elefantotask;
+ALTER DATABASE elefantotech OWNER TO elefantotask;
