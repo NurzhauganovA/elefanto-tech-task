@@ -1,8 +1,8 @@
 from django.core.exceptions import ValidationError
 
-from account.exceptions import UserNotFound
-from account.models import User
-from backend.account.utils import check_activation_code, check_password_reset_code, send_password_reset_code, \
+from ..exceptions import UserNotFound
+from ..models import User
+from ..utils import check_activation_code, check_password_reset_code, send_password_reset_code, \
     send_password_change_code, check_password_change_code
 
 
