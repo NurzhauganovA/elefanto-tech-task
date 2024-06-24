@@ -33,6 +33,16 @@ class BookCreateUpdateSerializer(serializers.ModelSerializer):
         }
 
 
+class BookAddToFavoriteSerializer(serializers.Serializer):
+    class Meta:
+        fields = []
+
+
+class BookRemoveFromFavoriteSerializer(serializers.Serializer):
+    class Meta:
+        fields = []
+
+
 class BookReviewsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
@@ -60,10 +70,6 @@ class BookDetailSerializer(serializers.ModelSerializer):
         model = Book
         fields = ['id', 'title', 'genre', 'author', 'publication_date', 'description', 'cover_image', 'reviews',
                   'average_rating', 'is_favorite']
-
-
-class BookAddRemoveFavoriteSerializer(serializers.Serializer):
-    book_id = serializers.IntegerField()
 
 
 class CreateBookReviewSerializer(serializers.ModelSerializer):

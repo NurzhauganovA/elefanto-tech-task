@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR, '.envs/.django'))
 
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = 'django-insecure-n0ypp)sg^(u&po%0p8&6p!5+n!3*ta#v42=3=sf+6ijo@047(-'  # env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,13 +79,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': env('DB_NAME'),
+    #     'USER': env('DB_USER'),
+    #     'PASSWORD': env('DB_PASSWORD'),
+    #     'HOST': env('DB_HOST'),
+    #     'PORT': env('DB_PORT'),
+    # }
 }
 
 
@@ -195,8 +199,8 @@ SWAGGER_SETTINGS = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')  # Password is not secure, because it's a just test task
+EMAIL_HOST_USER = 'elefantotechtask@gmail.com'  # env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = 'qwerty12345'  # env('EMAIL_HOST_PASSWORD')  # Password is not secure, because it's a just test task
 
 
-BASE_PASSWORD = env('BASE_PASSWORD')
+BASE_PASSWORD = 'techtask12345@'  # env('BASE_PASSWORD')
