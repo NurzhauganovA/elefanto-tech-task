@@ -2,7 +2,7 @@ from typing import Any
 from django.contrib.auth.models import BaseUserManager
 from django.db import transaction
 
-from backend.account.utils import send_activation_code
+from .utils import send_activation_code
 
 
 class UserManager(BaseUserManager):
