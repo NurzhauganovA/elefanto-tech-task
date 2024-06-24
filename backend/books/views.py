@@ -46,6 +46,7 @@ class BookViewSet(viewsets.ModelViewSet):
 
 
 class BookAddToFavoriteView(generics.GenericAPIView):
+    queryset = Book.objects.all().select_related('author', 'genre').prefetch_related('favorites', 'reviews')
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = BookAddToFavoriteSerializer
 
@@ -55,6 +56,7 @@ class BookAddToFavoriteView(generics.GenericAPIView):
 
 
 class BookRemoveFromFavoriteView(generics.GenericAPIView):
+    queryset = Book.objects.all().select_related('author', 'genre').prefetch_related('favorites', 'reviews')
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = BookRemoveFromFavoriteSerializer
 

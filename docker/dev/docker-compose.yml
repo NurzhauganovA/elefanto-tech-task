@@ -40,9 +40,21 @@ services:
         networks:
             - elefanto-network
 
+    elefanto-redis:
+        image: redis:alpine
+        container_name: elefanto-redis
+        restart: always
+        ports:
+            - "6379:6379"
+        volumes:
+            - redis_data:/data
+        networks:
+            - elefanto-network
+
 volumes:
     elefanto_db_data:
     media:
+    redis_data:
 
 networks:
     elefanto-network:

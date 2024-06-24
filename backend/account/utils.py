@@ -3,7 +3,7 @@ from django.core.cache import cache
 from django.core.mail import send_mail
 from django.db import transaction
 
-from account.exceptions import UserEmailSettingsFailed
+from .exceptions import UserEmailSettingsFailed
 from config import settings
 
 
@@ -15,15 +15,15 @@ def _send_code(user, cache_key: str, text: str, code: int):
     with transaction.atomic():
         cache.set(f'{cache_key}_{user.id}', code, timeout=300)  # 5 minutes
 
-        # try:
-        #     send_mail(
-        #         subject='Code confirmation',
-        #         message=text,
-        #         from_email=settings.EMAIL_HOST_USER,
-        #         recipient_list=[user.email]
-        #     )
-        # except Exception as e:
-        #     raise UserEmailSettingsFailed
+        try:
+            send_mail(
+                subject='Code confirmation',
+                message=text,
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[user.email]
+            )
+        except Exception as e:
+            raise UserEmailSettingsFailed
 
 
 def _check_code(user, cache_key: str, code: int):
